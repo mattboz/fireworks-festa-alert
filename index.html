@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Festa Fireworks Alert 🐾</title>
+<meta name="description" content="Which Malta &amp; Gozo village festas have fireworks soon, and how close are they? Built for dog owners." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎆</text></svg>" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="app-header">
+  <h1>🎆 Festa Fireworks Alert</h1>
+  <p class="tagline">Malta &amp; Gozo festa dates for dog owners &mdash; know when the mortali are coming.</p>
+</header>
+
+<main>
+  <section class="controls" aria-label="Settings">
+    <label class="field">
+      <span>Your town / village</span>
+      <select id="town-select"></select>
+    </label>
+    <label class="field">
+      <span>Alert radius</span>
+      <select id="radius-select">
+        <option value="0">Same locality only</option>
+        <option value="3" selected>Within 3 km</option>
+        <option value="5">Within 5 km</option>
+        <option value="8">Within 8 km</option>
+      </select>
+    </label>
+    <div class="field checkbox-field">
+      <label><input type="checkbox" id="upcoming-only" checked /> Upcoming festas only</label>
+    </div>
+  </section>
+
+  <section id="countdown-section" class="countdown-card" aria-live="polite">
+    <p class="countdown-loading">Pick your town above to see your next nearby festa.</p>
+  </section>
+
+  <section class="legend" aria-label="Legend">
+    <span class="chip chip-near">🔴 Near you</span>
+    <span class="chip chip-far">⚪ Further away</span>
+    <span class="chip chip-uncertain">❓ Date/scale unconfirmed</span>
+  </section>
+
+  <section id="festa-list" aria-label="Festa list"></section>
+
+  <section class="pattern-note">
+    <h2>What time do the fireworks usually start?</h2>
+    <p>
+      Exact times are rarely published in advance and can vary village to village, but the
+      typical <strong>mortali</strong> (aerial fireworks) pattern is:
+    </p>
+    <ul>
+      <li><strong>Morning round</strong> &mdash; usually around <strong>8am</strong>, most days of the festa.</li>
+      <li><strong>Evening round</strong> &mdash; on the main festa days.</li>
+      <li>
+        <strong>Friday, Saturday and Sunday</strong> of festa weekend typically get
+        <strong>both</strong> a morning and an evening round.
+      </li>
+    </ul>
+    <p class="disclaimer">
+      Treat this as a general expectation, not a guarantee &mdash; band clubs set their own
+      schedules and these aren't always officially published. If your dog is very
+      noise-sensitive, plan for the whole festa week, not just the titular day.
+    </p>
+  </section>
+
+  <section class="data-note">
+    <h2>About this data</h2>
+    <p id="data-methodology"></p>
+    <details>
+      <summary>Villages/dates flagged for review</summary>
+      <ul id="flagged-list"></ul>
+    </details>
+    <p class="sources">
+      Sources: <a href="https://www.maltainfoguide.com/malta-village-feasts.html" target="_blank" rel="noopener">maltainfoguide.com</a>,
+      <a href="https://sceneongozo.com/gozo-village-feasts-guide/" target="_blank" rel="noopener">sceneongozo.com</a>,
+      <a href="https://maltavents.com/blog/malta-village-feasts-2026-ultimate-guide" target="_blank" rel="noopener">maltavents.com</a>.
+      Dates can shift &mdash; always double check close to the day.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>Made for anxious dogs and the humans who love them 🐕 &middot; <a href="#" id="share-link">Copy share link</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

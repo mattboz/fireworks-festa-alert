@@ -1,0 +1,357 @@
+:root {
+  --bg: #0f172a;
+  --card-bg: #1a2540;
+  --card-bg-alt: #202c4d;
+  --text: #eef1f8;
+  --text-dim: #a8b3cc;
+  --accent: #ff8a3d;
+  --accent-2: #ffcf6b;
+  --near: #ff5d6c;
+  --near-bg: #3a1a22;
+  --far-bg: #1a2540;
+  --border: #2c3a63;
+  --radius: 14px;
+  --max-width: 640px;
+  font-size: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.app-header {
+  padding: 28px 4px 12px;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0 0 6px;
+  font-size: 1.6rem;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.field select {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg-alt);
+  color: var(--text);
+  appearance: none;
+}
+
+.checkbox-field {
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.checkbox-field input {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.countdown-card {
+  background: linear-gradient(135deg, #2b1d3d, #1a2540);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.countdown-loading {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+.countdown-days {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  line-height: 1;
+  margin: 0 0 4px;
+}
+
+.countdown-label {
+  margin: 0 0 8px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.countdown-detail {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.countdown-detail .place {
+  color: var(--accent);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.chip {
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--card-bg-alt);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+#festa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.month-heading {
+  margin: 18px 0 4px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.month-heading:first-child {
+  margin-top: 4px;
+}
+
+.festa-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--far-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  position: relative;
+}
+
+.festa-card.near {
+  background: var(--near-bg);
+  border-color: #6b2532;
+}
+
+.festa-card.past {
+  opacity: 0.45;
+}
+
+.festa-date {
+  flex: 0 0 56px;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.festa-date .day {
+  font-size: 1.35rem;
+  font-weight: 700;
+  display: block;
+}
+
+.festa-date .dow {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.festa-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.festa-village {
+  font-weight: 700;
+  font-size: 1.02rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.festa-title {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-top: 2px;
+}
+
+.festa-meta {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-near {
+  background: var(--near);
+  color: #2a0006;
+  font-weight: 700;
+}
+
+.badge-distance {
+  background: var(--card-bg-alt);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.badge-secondary {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.badge-unconfirmed {
+  background: transparent;
+  color: var(--accent-2);
+  border: 1px solid #5b4a1f;
+}
+
+.festa-countdown {
+  flex: 0 0 auto;
+  text-align: right;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  min-width: 52px;
+}
+
+.festa-countdown strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-dim);
+  padding: 24px 12px;
+}
+
+.pattern-note, .data-note {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.pattern-note h2, .data-note h2 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.pattern-note ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.pattern-note li {
+  margin-bottom: 4px;
+}
+
+.disclaimer {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.data-note p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.data-note summary {
+  cursor: pointer;
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  margin: 8px 0;
+}
+
+.data-note ul {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  padding-left: 18px;
+}
+
+.data-note ul li {
+  margin-bottom: 8px;
+}
+
+.sources {
+  font-size: 0.78rem !important;
+}
+
+.sources a {
+  color: var(--accent-2);
+}
+
+footer {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  padding: 12px 0 4px;
+}
+
+footer a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+@media (min-width: 520px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+  .checkbox-field {
+    grid-column: 1 / -1;
+  }
+}
