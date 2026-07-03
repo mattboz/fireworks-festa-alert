@@ -1,20 +1,45 @@
 :root {
+  /* Type scale: 6 deliberate steps. fs-2xl is a one-off "hero" size used once. */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.75rem;
+
+  /* Spacing scale: 4px base unit. */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
   --bg: #0b1120;
   --bg-gradient: radial-gradient(circle at 50% -10%, #1c2444 0%, #0b1120 55%);
   --card-bg: #161f38;
   --card-bg-alt: #1d2846;
   --text: #f3f5fb;
   --text-dim: #9aa5c4;
+  --text-muted: #6d7aa0;
   --accent: #ff8a3d;
   --accent-2: #ffcf6b;
   --near: #ff5d6c;
   --near-bg: #3a1a22;
+  --near-border: #6b2532;
   --far-bg: #161f38;
   --border: #2b3760;
-  --radius: 16px;
-  --radius-sm: 10px;
+
+  --shadow-sm: 0 2px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 36px -14px rgba(0, 0, 0, 0.65);
+
   --max-width: 640px;
-  --shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.5);
   font-size: 16px;
   color-scheme: dark;
 }
@@ -27,13 +52,16 @@
     --card-bg-alt: #f1eee3;
     --text: #221c14;
     --text-dim: #6b6455;
+    --text-muted: #948c78;
     --accent: #d9661f;
-    --accent-2: #b9790a;
+    --accent-2: #8a4f08;
     --near: #d63447;
     --near-bg: #fde3e3;
+    --near-border: #f0b9be;
     --far-bg: #ffffff;
     --border: #e5ddc9;
-    --shadow: 0 8px 24px -14px rgba(60, 40, 10, 0.25);
+    --shadow-sm: 0 2px 10px -6px rgba(60, 40, 10, 0.15);
+    --shadow-lg: 0 16px 36px -16px rgba(60, 40, 10, 0.28);
     color-scheme: light;
   }
 }
@@ -54,48 +82,62 @@ html, body {
 body {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 16px 48px;
+  padding: 0 var(--sp-4) var(--sp-10);
 }
 
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Header ---------- */
+
 .app-header {
-  padding: 32px 4px 16px;
+  padding: var(--sp-8) var(--sp-1) var(--sp-4);
   text-align: center;
 }
 
 .app-header h1 {
-  margin: 0 0 6px;
-  font-size: 1.7rem;
+  margin: 0 0 var(--sp-1);
+  font-size: var(--fs-xl);
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
 .tagline {
   margin: 0;
   color: var(--text-dim);
-  font-size: 0.95rem;
+  font-size: var(--fs-sm);
 }
+
+/* ---------- Controls ---------- */
 
 .controls {
   display: grid;
-  gap: 12px;
+  gap: var(--sp-3);
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px;
-  margin-bottom: 18px;
-  box-shadow: var(--shadow);
+  padding: var(--sp-5);
+  margin-bottom: var(--sp-6);
+  box-shadow: var(--shadow-sm);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 0.85rem;
+  gap: var(--sp-1);
+  font-size: var(--fs-sm);
   color: var(--text-dim);
 }
 
 .field select {
-  font-size: 1rem;
-  padding: 11px 12px;
+  font-size: var(--fs-base);
+  padding: var(--sp-3) var(--sp-3);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--card-bg-alt);
@@ -106,18 +148,18 @@ body {
 .towns-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: -2px;
+  gap: var(--sp-2);
+  margin-top: calc(var(--sp-1) * -1);
 }
 
 .town-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
   font-weight: 600;
-  padding: 6px 8px 6px 12px;
-  border-radius: 999px;
+  padding: var(--sp-1) var(--sp-1) var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-pill);
   background: var(--card-bg-alt);
   border: 1px solid var(--border);
   color: var(--text);
@@ -127,11 +169,11 @@ body {
   border: none;
   background: transparent;
   color: var(--text-dim);
-  font-size: 1rem;
+  font-size: var(--fs-base);
   line-height: 1;
   cursor: pointer;
-  padding: 2px 4px;
-  border-radius: 999px;
+  padding: var(--sp-1);
+  border-radius: var(--radius-pill);
 }
 
 .town-chip button:hover {
@@ -141,24 +183,29 @@ body {
 .checkbox-field {
   flex-direction: row;
   align-items: center;
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
   color: var(--text);
 }
 
 .checkbox-field input {
   width: 18px;
   height: 18px;
-  margin-right: 8px;
+  margin-right: var(--sp-2);
+  accent-color: var(--accent);
 }
+
+/* ---------- Countdown hero ----------
+   The single most important surface: strongest shadow + only place
+   fs-2xl is used, per Von Restorff / peak-end - it should stand out. */
 
 .countdown-card {
   background: linear-gradient(135deg, #3a2560, #161f38);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px 20px;
-  margin-bottom: 18px;
+  padding: var(--sp-6) var(--sp-5);
+  margin-bottom: var(--sp-6);
   text-align: center;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
 }
 
 @media (prefers-color-scheme: light) {
@@ -170,25 +217,26 @@ body {
 .countdown-loading {
   margin: 0;
   color: var(--text-dim);
+  font-size: var(--fs-base);
 }
 
 .countdown-days {
-  font-size: 2.8rem;
+  font-size: var(--fs-2xl);
   font-weight: 800;
   color: var(--accent-2);
   line-height: 1;
-  margin: 0 0 4px;
+  margin: 0 0 var(--sp-1);
 }
 
 .countdown-label {
-  margin: 0 0 8px;
+  margin: 0 0 var(--sp-2);
   color: var(--text-dim);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 
 .countdown-detail {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
 }
 
@@ -196,24 +244,27 @@ body {
   color: var(--accent);
 }
 
+/* ---------- Section heading row ---------- */
+
 .section-heading-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
 }
 
 .section-heading-row h2 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
+  font-weight: 700;
 }
 
 .btn-ghost {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 999px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--border);
   background: var(--card-bg-alt);
   color: var(--text);
@@ -225,70 +276,69 @@ body {
   color: var(--accent-2);
 }
 
+/* ---------- Legend ---------- */
+
 .legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-1);
 }
 
 .chip {
-  font-size: 0.78rem;
-  padding: 4px 10px;
-  border-radius: 999px;
+  font-size: var(--fs-xs);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-pill);
   background: var(--card-bg-alt);
   border: 1px solid var(--border);
   color: var(--text-dim);
 }
 
 .loudness-disclaimer {
-  font-size: 0.76rem;
-  color: var(--text-dim);
-  margin: 0 0 20px;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin: 0 0 var(--sp-6);
 }
+
+/* ---------- Festa cards ---------- */
 
 #near-festas, #festa-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--sp-3);
 }
 
 #near-section {
-  margin-bottom: 20px;
+  margin-bottom: var(--sp-6);
 }
 
 .month-heading {
-  margin: 18px 0 4px;
-  font-size: 0.8rem;
+  margin: var(--sp-5) 0 var(--sp-1);
+  font-size: var(--fs-xs);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-dim);
 }
 
 .month-heading:first-child {
-  margin-top: 4px;
+  margin-top: var(--sp-1);
 }
 
 .festa-card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--sp-3);
   background: var(--far-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px 16px;
+  padding: var(--sp-4);
   position: relative;
 }
 
 .festa-card.near {
   background: var(--near-bg);
-  border-color: #6b2532;
-}
-
-@media (prefers-color-scheme: light) {
-  .festa-card.near {
-    border-color: #f0b9be;
-  }
+  border-color: var(--near-border);
 }
 
 .festa-card.past {
@@ -296,19 +346,19 @@ body {
 }
 
 .festa-date {
-  flex: 0 0 56px;
+  flex: 0 0 52px;
   text-align: center;
   line-height: 1.1;
 }
 
 .festa-date .day {
-  font-size: 1.35rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   display: block;
 }
 
 .festa-date .dow {
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   color: var(--text-dim);
   text-transform: uppercase;
 }
@@ -320,39 +370,42 @@ body {
 
 .festa-village {
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: var(--fs-base);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--sp-2);
   flex-wrap: wrap;
 }
 
 .festa-title {
   color: var(--text-dim);
-  font-size: 0.88rem;
+  font-size: var(--fs-sm);
   margin-top: 2px;
 }
 
 .festa-loudness {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: var(--sp-1);
 }
 
 .festa-meta {
   display: flex;
-  gap: 6px;
-  margin-top: 6px;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
   flex-wrap: wrap;
 }
 
 .badge {
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  border-radius: 999px;
+  font-size: var(--fs-xs);
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius-pill);
   white-space: nowrap;
 }
 
+/* Badge hierarchy: near = filled/bold (primary signal), distance/secondary =
+   outlined (lower priority), unconfirmed = outlined + accent color (a flag,
+   not a status). Mirrors filled/outline button hierarchy. */
 .badge-near {
   background: var(--near);
   color: #2a0006;
@@ -360,7 +413,7 @@ body {
 }
 
 .badge-distance {
-  background: var(--card-bg-alt);
+  background: transparent;
   color: var(--text-dim);
   border: 1px solid var(--border);
 }
@@ -374,41 +427,46 @@ body {
 .badge-unconfirmed {
   background: transparent;
   color: var(--accent-2);
-  border: 1px solid #5b4a1f;
+  border: 1px solid var(--accent-2);
 }
 
 .festa-countdown {
   flex: 0 0 auto;
   text-align: right;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--text-dim);
-  min-width: 52px;
+  min-width: 50px;
 }
 
 .festa-countdown strong {
   display: block;
-  font-size: 1rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
   color: var(--text);
 }
 
 .empty-state {
   text-align: center;
   color: var(--text-dim);
-  padding: 24px 12px;
+  font-size: var(--fs-sm);
+  padding: var(--sp-6) var(--sp-3);
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   margin: 0;
 }
 
+/* ---------- Full season list (secondary/reference view) ---------- */
+
 .full-list-details {
-  margin-bottom: 18px;
+  margin-bottom: var(--sp-6);
 }
 
 .full-list-details summary {
   cursor: pointer;
   font-weight: 700;
-  padding: 12px 4px;
+  font-size: var(--fs-base);
+  padding: var(--sp-3) var(--sp-1);
   color: var(--text);
 }
 
@@ -418,34 +476,37 @@ body {
 }
 
 .full-list-details .checkbox-field {
-  margin: 8px 0 14px;
+  margin: var(--sp-2) 0 var(--sp-4);
 }
+
+/* ---------- Info sections ---------- */
 
 .pattern-note, .data-note, .elsewhere-note {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px 20px;
-  margin-bottom: 16px;
+  padding: var(--sp-5) var(--sp-5);
+  margin-bottom: var(--sp-4);
 }
 
 .pattern-note h2, .data-note h2, .elsewhere-note h2 {
-  font-size: 1rem;
+  font-size: var(--fs-base);
+  font-weight: 700;
   margin-top: 0;
 }
 
 .pattern-note ul, .elsewhere-note ul {
-  padding-left: 20px;
-  margin: 10px 0;
+  padding-left: var(--sp-5);
+  margin: var(--sp-3) 0;
 }
 
 .pattern-note li, .elsewhere-note li {
-  margin-bottom: 8px;
-  font-size: 0.92rem;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
 }
 
 .elsewhere-note p {
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
   color: var(--text-dim);
   margin-top: 0;
 }
@@ -456,33 +517,33 @@ body {
 
 .disclaimer {
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
 }
 
 .data-note p {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: var(--text-dim);
 }
 
 .data-note summary {
   cursor: pointer;
   color: var(--accent-2);
-  font-size: 0.88rem;
-  margin: 8px 0;
+  font-size: var(--fs-sm);
+  margin: var(--sp-2) 0;
 }
 
 .data-note ul {
-  font-size: 0.82rem;
+  font-size: var(--fs-xs);
   color: var(--text-dim);
-  padding-left: 18px;
+  padding-left: var(--sp-4);
 }
 
 .data-note ul li {
-  margin-bottom: 8px;
+  margin-bottom: var(--sp-2);
 }
 
 .sources {
-  font-size: 0.78rem !important;
+  font-size: var(--fs-xs) !important;
 }
 
 .sources a {
@@ -492,8 +553,8 @@ body {
 footer {
   text-align: center;
   color: var(--text-dim);
-  font-size: 0.82rem;
-  padding: 12px 0 4px;
+  font-size: var(--fs-xs);
+  padding: var(--sp-3) 0 var(--sp-1);
 }
 
 footer a {
