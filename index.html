@@ -5,21 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Festa Fireworks Alert 🐾</title>
 <meta name="description" content="Which Malta &amp; Gozo village festas have fireworks soon, and how close are they? Built for dog owners." />
+<meta name="theme-color" content="#0f172a" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎆</text></svg>" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <header class="app-header">
   <h1>🎆 Festa Fireworks Alert</h1>
-  <p class="tagline">Malta &amp; Gozo festa dates for dog owners &mdash; know when the mortali are coming.</p>
+  <p class="tagline">Malta &amp; Gozo festa dates for dog owners &mdash; know when the mortali are coming, all year round.</p>
 </header>
 
 <main>
   <section class="controls" aria-label="Settings">
     <label class="field">
-      <span>Your town / village</span>
-      <select id="town-select"></select>
+      <span>Your towns</span>
+      <select id="town-add-select"></select>
     </label>
+    <div id="towns-chips" class="towns-chips" aria-live="polite"></div>
+
     <label class="field">
       <span>Alert radius</span>
       <select id="radius-select">
@@ -29,13 +32,18 @@
         <option value="8">Within 8 km</option>
       </select>
     </label>
-    <div class="field checkbox-field">
-      <label><input type="checkbox" id="upcoming-only" checked /> Upcoming festas only</label>
-    </div>
   </section>
 
   <section id="countdown-section" class="countdown-card" aria-live="polite">
-    <p class="countdown-loading">Pick your town above to see your next nearby festa.</p>
+    <p class="countdown-loading">Add a town above to see your next nearby festa.</p>
+  </section>
+
+  <section id="near-section" aria-label="Your festas">
+    <div class="section-heading-row">
+      <h2>Your festas</h2>
+      <button type="button" id="calendar-export" class="btn-ghost" hidden>📅 Add to calendar</button>
+    </div>
+    <div id="near-festas"></div>
   </section>
 
   <section class="legend" aria-label="Legend">
@@ -43,8 +51,15 @@
     <span class="chip chip-far">⚪ Further away</span>
     <span class="chip chip-uncertain">❓ Date/scale unconfirmed</span>
   </section>
+  <p class="loudness-disclaimer">🔊 Loudness is an estimate based on distance and festa scale, not measured decibel data.</p>
 
-  <section id="festa-list" aria-label="Festa list"></section>
+  <details class="full-list-details">
+    <summary>Full season list, all festas <span id="full-list-count"></span></summary>
+    <label class="field checkbox-field">
+      <input type="checkbox" id="upcoming-only" checked /> Upcoming festas only
+    </label>
+    <section id="festa-list" aria-label="Full festa list"></section>
+  </details>
 
   <section class="pattern-note">
     <h2>What time do the fireworks usually start?</h2>
@@ -67,6 +82,29 @@
     </p>
   </section>
 
+  <section class="elsewhere-note">
+    <h2>What's happening elsewhere</h2>
+    <p>
+      Malta isn't alone in balancing festa tradition with animal welfare &mdash; a few things
+      worth knowing about:
+    </p>
+    <ul>
+      <li>
+        A <a href="https://www.change.org/p/petition-for-safer-more-responsible-fireworks-regulations-in-malta-and-gozo" target="_blank" rel="noopener">live petition</a>
+        is asking the Maltese government for stricter fireworks safety regulation.
+      </li>
+      <li>
+        The UK's RSPCA runs a <a href="https://www.rspca.org.uk/getinvolved/campaign/fireworks" target="_blank" rel="noopener">"Kind Sparks" campaign</a>
+        promoting low-noise fireworks and displays that are kinder to nearby pets.
+      </li>
+      <li>
+        For Valencia's Las Fallas &mdash; a festival with a similar firecracker culture to Malta's festi &mdash;
+        the city now <a href="https://www.valenciaextra.com/es/valencia/fallas-2026-valencia-reparte-panuelos-verdes-perros-establece-franjas-sin-petardos_582696_102.html" target="_blank" rel="noopener">hands out green scarves to anxious dogs</a>
+        and sets two daily firecracker-free windows so owners can walk them safely (Spanish-language source).
+      </li>
+    </ul>
+  </section>
+
   <section class="data-note">
     <h2>About this data</h2>
     <p id="data-methodology"></p>
@@ -77,7 +115,8 @@
     <p class="sources">
       Sources: <a href="https://www.maltainfoguide.com/malta-village-feasts.html" target="_blank" rel="noopener">maltainfoguide.com</a>,
       <a href="https://sceneongozo.com/gozo-village-feasts-guide/" target="_blank" rel="noopener">sceneongozo.com</a>,
-      <a href="https://maltavents.com/blog/malta-village-feasts-2026-ultimate-guide" target="_blank" rel="noopener">maltavents.com</a>.
+      <a href="https://maltavents.com/blog/malta-village-feasts-2026-ultimate-guide" target="_blank" rel="noopener">maltavents.com</a>,
+      and the Archdiocese of Malta's official festa calendar.
       Dates can shift &mdash; always double check close to the day.
     </p>
   </section>
